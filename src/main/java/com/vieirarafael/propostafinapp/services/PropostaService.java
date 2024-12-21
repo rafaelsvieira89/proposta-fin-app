@@ -15,13 +15,13 @@ import java.util.List;
 public class PropostaService {
     private final PropostaRepository propostaRepository;
     private final PropostaMapper propostaMapper;
-    private final NotificacaoService notificacaoService;
+    private final NotificacaoRabbitMqService notificacaoRabbitMqService;
     private final String exchange;
 
-    public PropostaService(PropostaRepository propostaRepository, PropostaMapper propostaMapper, NotificacaoService notificacaoService, @Value("${rabbitmq.propostapendente.exchange}") String exchange) {
+    public PropostaService(PropostaRepository propostaRepository, PropostaMapper propostaMapper, NotificacaoRabbitMqService notificacaoRabbitMqService, @Value("${rabbitmq.propostapendente.exchange}") String exchange) {
         this.propostaRepository = propostaRepository;
         this.propostaMapper = propostaMapper;
-        this.notificacaoService = notificacaoService;
+        this.notificacaoRabbitMqService = notificacaoRabbitMqService;
         this.exchange = exchange;
     }
 
@@ -36,7 +36,7 @@ public class PropostaService {
 
     private void notificarRabbitMq(Proposta proposta) {
         try {
-            notificacaoService.notificar(proposta, exchange);
+            notificacaoRabbitMqService.notificar(proposta, exchange);
         } catch (RuntimeException e) {
             //TODO criar job para pegar as propostas nao enviadas e enviar para o RabbitMQ novamente em outro momento
             proposta.setIntegrada(false);
@@ -59,4 +59,5 @@ public class PropostaService {
     public List<PropostaResponseDto> getAll() {
         return propostaMapper.convertPropostaToDto(propostaRepository.findAll());
     }
+
 }
