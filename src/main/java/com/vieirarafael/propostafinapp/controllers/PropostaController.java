@@ -36,12 +36,12 @@ public class PropostaController {
     }
     @GetMapping("/{id}")
     public ResponseEntity<PropostaResponseDto> getProposta(@PathVariable Long id) {
-        return ResponseEntity.ok().body(propostaService.get(id));
+        return ResponseEntity.ok(propostaService.get(id));
     }
     
     @GetMapping
     public ResponseEntity<List<PropostaResponseDto>> getAllProposta() {
-        return ResponseEntity.ok().body(propostaService.getAll());
+        return ResponseEntity.ok(propostaService.getAll());
     }
 
     
