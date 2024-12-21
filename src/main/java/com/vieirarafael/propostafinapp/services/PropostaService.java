@@ -18,10 +18,7 @@ public class PropostaService {
     private final NotificacaoService notificacaoService;
     private final String exchange;
 
-    public PropostaService(PropostaRepository propostaRepository,
-                           PropostaMapper propostaMapper,
-                           NotificacaoService notificacaoService,
-                           @Value( "${rabbitmq.propostapendente.exchange}") String exchange) {
+    public PropostaService(PropostaRepository propostaRepository, PropostaMapper propostaMapper, NotificacaoService notificacaoService, @Value("${rabbitmq.propostapendente.exchange}") String exchange) {
         this.propostaRepository = propostaRepository;
         this.propostaMapper = propostaMapper;
         this.notificacaoService = notificacaoService;
@@ -29,14 +26,21 @@ public class PropostaService {
     }
 
     public PropostaResponseDto criar(PropostaRequestDto propostaRequestDto) {
-        var proposta = converter(propostaRequestDto);
-        var response = converter(
-                propostaRepository.save(
-                        proposta
-                )
-        );
-        notificacaoService.notificar(response, exchange);
-        return response;
+
+        var proposta = propostaRepository.save(converter(propostaRequestDto));
+
+        notificarRabbitMq(proposta);
+
+        return converter(proposta);
+    }
+
+    private void notificarRabbitMq(Proposta proposta) {
+        try {
+            notificacaoService.notificar(proposta, exchange);
+        } catch (RuntimeException e) {
+            proposta.setIntegrada(false);
+            propostaRepository.save(proposta);
+        }
     }
 
     private Proposta converter(PropostaRequestDto request) {
@@ -48,8 +52,7 @@ public class PropostaService {
     }
 
     public PropostaResponseDto get(Long id) {
-        return converter(propostaRepository.findById(id)
-                .orElseThrow(() -> new PropostaNotFoundException("Proposta com ID " + id + " não encontrada.")));
+        return converter(propostaRepository.findById(id).orElseThrow(() -> new PropostaNotFoundException("Proposta com ID " + id + " não encontrada.")));
     }
 
     public List<PropostaResponseDto> getAll() {
