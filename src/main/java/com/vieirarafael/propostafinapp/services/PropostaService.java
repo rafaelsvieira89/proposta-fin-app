@@ -16,15 +16,17 @@ import java.util.List;
 public class PropostaService {
     private final PropostaRepository propostaRepository;
     private final PropostaMapper propostaMapper;
+    private final NotificacaoService notificacaoService;
 
     public PropostaResponseDto criar(PropostaRequestDto propostaRequestDto) {
         var proposta = converter(propostaRequestDto);
-
-        return converter(
+        var response = converter(
                 propostaRepository.save(
                         proposta
                 )
         );
+        notificacaoService.notificar(response, "proposta-pendente.ex");
+        return response;
     }
 
     private Proposta converter(PropostaRequestDto request) {
