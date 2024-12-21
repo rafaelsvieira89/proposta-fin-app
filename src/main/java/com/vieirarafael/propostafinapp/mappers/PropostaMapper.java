@@ -18,7 +18,8 @@ public interface PropostaMapper {
     @Mapping(target = "usuario.renda", source = "renda")
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "aprovada", ignore = true)
-    @Mapping(target = "integrada", ignore = true)
+    //comeca sempre integrada, passamos pra falso só em caso de erros
+    @Mapping(target = "integrada", constant = "true")
     @Mapping(target = "observacao", ignore = true)
     Proposta convertDtoToProposta(PropostaRequestDto propostaRequestDto);
 

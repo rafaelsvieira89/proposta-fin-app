@@ -38,6 +38,7 @@ public class PropostaService {
         try {
             notificacaoService.notificar(proposta, exchange);
         } catch (RuntimeException e) {
+            //TODO criar job para pegar as propostas nao enviadas e enviar para o RabbitMQ novamente em outro momento
             proposta.setIntegrada(false);
             propostaRepository.save(proposta);
         }
