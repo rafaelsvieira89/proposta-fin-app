@@ -5,7 +5,6 @@ import com.vieirarafael.propostafinapp.dto.PropostaResponseDto;
 import com.vieirarafael.propostafinapp.entities.Proposta;
 import com.vieirarafael.propostafinapp.mappers.PropostaMapper;
 import com.vieirarafael.propostafinapp.repositories.PropostaRepository;
-import com.vieirarafael.propostafinapp.repositories.UsuarioRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class PropostaService {
     private final PropostaRepository propostaRepository;
-    private final UsuarioRepository usuarioRepository;
     private final PropostaMapper propostaMapper;
 
     public PropostaResponseDto criar(PropostaRequestDto propostaRequestDto) {
@@ -21,11 +19,7 @@ public class PropostaService {
 
         return converter(
                 propostaRepository.save(
-                        proposta.setUsuario(
-                                usuarioRepository.save(
-                                        proposta.getUsuario()
-                                )
-                        )
+                        proposta
                 )
         );
     }
