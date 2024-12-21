@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -37,6 +38,13 @@ public class PropostaController {
     public ResponseEntity<PropostaResponseDto> getProposta(@PathVariable Long id) {
         return ResponseEntity.ok().body(propostaService.get(id));
     }
+    
+    @GetMapping
+    public ResponseEntity<List<PropostaResponseDto>> getAllProposta() {
+        return ResponseEntity.ok().body(propostaService.getAll());
+    }
+
+    
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(PropostaNotFoundException.class)

@@ -9,6 +9,8 @@ import com.vieirarafael.propostafinapp.repositories.PropostaRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @AllArgsConstructor
 @Service
 public class PropostaService {
@@ -36,5 +38,11 @@ public class PropostaService {
     public PropostaResponseDto get(Long id) {
         return converter(propostaRepository.findById(id)
                 .orElseThrow(() -> new PropostaNotFoundException("Proposta com ID " + id + " não encontrada.")));
+    }
+
+    public List<PropostaResponseDto> getAll() {
+        return propostaRepository.findAll().stream()
+                .map(this::converter)
+                .toList();
     }
 }
