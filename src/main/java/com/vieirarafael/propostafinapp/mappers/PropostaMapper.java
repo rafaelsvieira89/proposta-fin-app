@@ -6,6 +6,8 @@ import com.vieirarafael.propostafinapp.entities.Proposta;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface PropostaMapper {
     @Mapping(target = "usuario.nome", source = "nome")
@@ -25,4 +27,6 @@ public interface PropostaMapper {
     @Mapping(target = "cpf", source = "usuario.cpf")
     @Mapping(target = "renda", source = "usuario.renda")
     PropostaResponseDto convertPropostaToDto(Proposta proposta);
+
+    List<PropostaResponseDto> convertPropostaToDto(List<Proposta> proposta);
 }

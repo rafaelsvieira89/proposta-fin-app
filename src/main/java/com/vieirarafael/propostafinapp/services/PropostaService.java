@@ -41,8 +41,6 @@ public class PropostaService {
     }
 
     public List<PropostaResponseDto> getAll() {
-        return propostaRepository.findAll().stream()
-                .map(this::converter)
-                .toList();
+        return propostaMapper.convertPropostaToDto(propostaRepository.findAll());
     }
 }
