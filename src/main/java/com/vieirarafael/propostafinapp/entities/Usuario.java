@@ -1,5 +1,6 @@
 package com.vieirarafael.propostafinapp.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,5 +22,6 @@ public class Usuario {
     private String telefone;
     private Double renda;
     @OneToOne(mappedBy = "usuario")
+    @JsonBackReference
     private Proposta proposta;
 }
