@@ -18,7 +18,7 @@ public class PropostaService {
     private final NotificacaoRabbitMqService notificacaoRabbitMqService;
     private final String exchange;
 
-    public PropostaService(PropostaRepository propostaRepository, PropostaMapper propostaMapper, NotificacaoRabbitMqService notificacaoRabbitMqService, @Value("${rabbitmq.propostapendente.exchange}") String exchange) {
+    public PropostaService(PropostaRepository propostaRepository, PropostaMapper propostaMapper, NotificacaoRabbitMqService notificacaoRabbitMqService, @Value("${rabbitmq.exchanges.proposta-pendente}") String exchange) {
         this.propostaRepository = propostaRepository;
         this.propostaMapper = propostaMapper;
         this.notificacaoRabbitMqService = notificacaoRabbitMqService;
