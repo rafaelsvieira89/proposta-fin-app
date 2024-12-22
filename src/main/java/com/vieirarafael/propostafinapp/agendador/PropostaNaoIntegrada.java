@@ -18,7 +18,7 @@ public class PropostaNaoIntegrada {
     private final String exchange;
 
     public PropostaNaoIntegrada(PropostaRepository propostaRepository, NotificacaoRabbitMqService notificacaoRabbitMqService,
-                                @Value("${rabbitmq.propostapendente.exchange}") String exchange) {
+                                @Value("${rabbitmq.exchanges.proposta-pendente}") String exchange) {
         this.exchange = exchange;
         this.propostaRepository = propostaRepository;
         this.notificacaoRabbitMqService = notificacaoRabbitMqService;
