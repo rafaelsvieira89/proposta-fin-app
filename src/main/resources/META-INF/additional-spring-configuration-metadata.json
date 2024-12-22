@@ -1,11 +1,6 @@
 {
   "properties": [
     {
-      "name": "rabbitmq.propostaconcluida.exchange",
-      "type": "java.lang.String",
-      "description": "Description for rabbitmq.propostaconcluida.exchange."
-    },
-    {
       "name": "rabbitmq.exchanges.proposta-pendente",
       "type": "java.lang.String",
       "description": "Description for rabbitmq.exchanges.proposta-pendente."
