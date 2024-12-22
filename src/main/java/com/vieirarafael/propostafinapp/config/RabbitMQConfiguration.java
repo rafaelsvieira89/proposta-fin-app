@@ -11,10 +11,10 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RabbitMQConfiguration {
-    @Value( "${rabbitmq.propostapendente.exchange}")
+    @Value( "${rabbitmq.exchanges.proposta-pendente}")
     private String propostaPendenteExchange;
 
-    @Value( "${rabbitmq.propostaconcluida.exchange}")
+    @Value( "${rabbitmq.exchanges.proposta-concluida}")
     private String propostaConcluidaExchange;
 
     @Bean
