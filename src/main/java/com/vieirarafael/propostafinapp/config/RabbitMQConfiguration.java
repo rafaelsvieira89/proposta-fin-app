@@ -14,6 +14,9 @@ public class RabbitMQConfiguration {
     @Value( "${rabbitmq.propostapendente.exchange}")
     private String propostaPendenteExchange;
 
+    @Value( "${rabbitmq.propostaconcluida.exchange}")
+    private String propostaConcluidaExchange;
+
     @Bean
     public Queue criarFilaPropostaPendenteMsAnaliseCredito() {
         return QueueBuilder.durable("proposta-pendente.ms-analise-credito")
@@ -42,6 +45,10 @@ public class RabbitMQConfiguration {
     public FanoutExchange criarFanoutExchangePropostaPendente() {
         return ExchangeBuilder.fanoutExchange(propostaPendenteExchange).build();
     }
+    @Bean
+    public FanoutExchange criarFanoutExchangePropostaConcluida() {
+        return ExchangeBuilder.fanoutExchange(propostaConcluidaExchange).build();
+    }
 
     @Bean
     public Binding criarBindingPropostaPendenteMsAnaliseCredito() {
@@ -54,6 +61,19 @@ public class RabbitMQConfiguration {
         return BindingBuilder.bind(criarFilaPropostaPendenteMsNotificacao())
                 .to(criarFanoutExchangePropostaPendente());
     }
+
+    @Bean
+    public Binding criarBindingPropostaConcluidaMsPropostaApp() {
+        return BindingBuilder.bind(criarFilaPropostaConcluidaMsProposta())
+                .to(criarFanoutExchangePropostaConcluida());
+    }
+
+    @Bean
+    public Binding criarBindingPropostaConcluidaMsNotificacao() {
+        return BindingBuilder.bind(criarFilaPropostaConcluidaMsNotificacao())
+                .to(criarFanoutExchangePropostaConcluida());
+    }
+
 
     @Bean
     public Jackson2JsonMessageConverter jackson2JsonMessageConverter() {
