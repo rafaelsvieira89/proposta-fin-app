@@ -20,6 +20,7 @@ spring:
 rabbitmq:
   exchanges:
     proposta-pendente: proposta-pendente.ex
+    proposta-pendente-dlx: proposta-pendente-dlx.ex
     proposta-concluida: proposta-concluida.ex
 
 scheduler:
