@@ -23,7 +23,7 @@ public class PropostaNaoIntegrada {
         this.propostaRepository = propostaRepository;
         this.notificacaoRabbitMqService = notificacaoRabbitMqService;
     }
-    @Scheduled(fixedDelayString = "${agendador.propostanaointegrada.intervalo}", timeUnit = TimeUnit.SECONDS)
+    @Scheduled(fixedDelayString = "${scheduler.propostas.nao-integradas.intervalo}", timeUnit = TimeUnit.SECONDS)
     public void buscarPropostasNaoIntegradas() {
         propostaRepository.findAllByIntegradaIsFalse().forEach(proposta -> {
             try {
