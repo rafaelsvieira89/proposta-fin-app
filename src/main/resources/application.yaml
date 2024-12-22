@@ -27,6 +27,9 @@ rabbitmq:
     proposta-pendente: proposta-pendente.ex
     proposta-pendente-dlx: proposta-pendente-dlx.ex
     proposta-concluida: proposta-concluida.ex
+  queue:
+    proposta:
+      concluida: proposta-concluida.ms-proposta
 
 scheduler:
   propostas:
