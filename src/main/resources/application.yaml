@@ -1,9 +1,6 @@
 spring:
   application:
     name: proposta-fin-app
-  sleuth:
-    sampler:
-      probability: 1.0
 
   datasource:
     url: jdbc:postgresql://localhost:5432/propostafindb
@@ -24,7 +21,6 @@ spring:
         retry:
           enabled: true
           max-attempts: 3
-
 rabbitmq:
   exchanges:
     proposta-pendente: proposta-pendente.ex
@@ -38,3 +34,7 @@ scheduler:
   propostas:
     nao-integradas:
       intervalo: 10 # Intervalo em minutos
+management:
+  tracing:
+    sampling:
+      probability: 1.0
