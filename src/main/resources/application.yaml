@@ -1,6 +1,9 @@
 spring:
   application:
     name: proposta-fin-app
+  sleuth:
+    sampler:
+      probability: 1.0
 
   datasource:
     url: jdbc:postgresql://localhost:5432/propostafindb
