@@ -5,7 +5,7 @@ metadata:
   name: rabbitmq
   labels:
     app: rabbitmq
-    type: LoadBalacer
+    type: LoadBalancer
 spec:
   selector:
     app: rabbitmq
