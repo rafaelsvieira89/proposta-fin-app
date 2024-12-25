@@ -3,6 +3,6 @@ kind: ConfigMap
 metadata:
   name: postgres-config
 data:
-  POSTGRES_DB: propostafindb
-  POSTGRES_USER: postgres
-  POSTGRES_PASSWORD: 1234
+  POSTGRES_DB: "propostafindb"
+  POSTGRES_USER: "postgres"
+  POSTGRES_PASSWORD: "1234"

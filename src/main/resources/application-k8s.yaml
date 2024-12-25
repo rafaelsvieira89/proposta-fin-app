@@ -1,0 +1,25 @@
+
+server:
+  port: 8082
+
+spring:
+  application:
+    name: proposta-fin
+  datasource:
+    url: jdbc:postgresql://postgres:5432/propostafindb
+    username: postgres
+    password: 1234
+management:
+  endpoints:
+    web:
+      exposure:
+        include: *
+  endpoint:
+    health:
+      show-details: always
+  zipkin:
+    tracing:
+      endpoint: http://zipkin:9411/api/v2/spans
+  tracing:
+    sampling:
+      probability: 0.5
